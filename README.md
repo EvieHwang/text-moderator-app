@@ -1,1 +1,118 @@
-# 🛡️ Text Moderator\n\nA privacy-focused, AI-powered text toxicity analysis tool built with Flask and powered by Duc Haba's Friendly Text Moderation API.\n\n## ✨ Features\n\n- **🔒 Privacy First**: Anonymous usage, no data logging or storage\n- **🎨 Modern UI**: Beautiful Atom One Dark theme\n- **⚡ Real-time Analysis**: Instant toxicity detection across multiple categories\n- **🛡️ Rate Limited**: 20 requests per hour to prevent abuse\n- **📱 Responsive**: Works on desktop and mobile\n- **🚫 No Registration**: No accounts or personal info required\n\n## 🔍 Analysis Categories\n\n- Harassment & Threatening\n- Hate Speech & Threatening\n- Violence & Graphic Violence\n- Sexual Content & Minors\n- Self-Harm, Instructions & Intent\n\n## 🚀 Quick Start\n\n### Prerequisites\n\n- Python 3.9+\n- HuggingFace account (for API access)\n\n### Local Development\n\n1. **Clone the repository**\n   ```bash\n   git clone <your-repo-url>\n   cd text-moderator-app\n   ```\n\n2. **Set up virtual environment**\n   ```bash\n   python -m venv venv\n   source venv/bin/activate  # On Windows: venv\\Scripts\\activate\n   ```\n\n3. **Install dependencies**\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n4. **Configure environment**\n   ```bash\n   cp .env.example .env\n   # Edit .env with your HuggingFace token\n   ```\n\n5. **Run the application**\n   ```bash\n   python backend/app.py\n   ```\n\n6. **Open in browser**\n   ```\n   http://localhost:8000\n   ```\n\n## 🔐 Environment Variables\n\nCreate a `.env` file:\n\n```env\nHUGGINGFACE_TOKEN=your_huggingface_token_here\n```\n\n## 🏗️ Project Structure\n\n```\ntext-moderator-app/\n├── backend/\n│   ├── app.py              # Flask application\n│   └── templates/\n│       └── index.html      # Frontend interface\n├── requirements.txt        # Python dependencies\n├── .env                   # Environment variables (not in git)\n├── .gitignore            # Git ignore rules\n└── README.md             # This file\n```\n\n## 🌐 Deployment\n\n### AWS Lambda + API Gateway\n\nReady for serverless deployment to AWS. See deployment guide for detailed instructions.\n\n### Other Platforms\n\n- **Heroku**: One-click deployment ready\n- **Vercel**: Serverless function compatible\n- **Railway**: Container deployment ready\n\n## 🔒 Privacy & Security\n\n- **No Data Storage**: Text is analyzed in real-time and immediately discarded\n- **No Logging**: User inputs are never logged or stored\n- **Anonymous Usage**: No user accounts or personal information collected\n- **Rate Limited**: Prevents API abuse with 20 requests/hour limit\n- **Secure**: API keys properly protected and never exposed to client\n\n## 🎯 Use Cases\n\n- **Content Moderation**: Review user-generated content\n- **Social Media**: Pre-screen posts and comments\n- **Education**: Teach about AI and text analysis\n- **Development**: Test moderation algorithms\n- **Research**: Analyze text toxicity patterns\n\n## 🤝 Contributing\n\n1. Fork the repository\n2. Create a feature branch\n3. Make your changes\n4. Add tests if applicable\n5. Submit a pull request\n\n## 📄 License\n\nMIT License - see LICENSE file for details.\n\n## 🙏 Acknowledgments\n\n- **Duc Haba** - For the Friendly Text Moderation API\n- **HuggingFace** - For hosting the AI model\n- **Flask** - For the web framework\n\n## 📞 Support\n\nFor issues or questions:\n1. Check existing GitHub issues\n2. Create a new issue with detailed description\n3. Include error messages and steps to reproduce\n\n---\n\n**Built with ❤️ for safer online communities**\n
+🛡️ Text Moderator
+A privacy-focused, AI-powered text toxicity analysis tool built with Flask and powered by Duc Haba's Friendly Text Moderation API.
+✨ Features
+
+🔒 Privacy First: Anonymous usage, no data logging or storage
+🎨 Modern UI: Beautiful Atom One Dark theme
+⚡ Real-time Analysis: Instant toxicity detection across multiple categories
+🛡️ Rate Limited: 20 requests per hour to prevent abuse
+📱 Responsive: Works on desktop and mobile
+🚫 No Registration: No accounts or personal info required
+
+🔍 Analysis Categories
+
+Harassment & Threatening
+Hate Speech & Threatening
+Violence & Graphic Violence
+Sexual Content & Minors
+Self-Harm, Instructions & Intent
+
+🚀 Quick Start
+Prerequisites
+
+Python 3.9+
+HuggingFace account (for API access)
+
+Local Development
+
+Clone the repository
+bashgit clone <your-repo-url>
+cd text-moderator-app
+
+Set up virtual environment
+bashpython -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+Install dependencies
+bashpip install -r requirements.txt
+
+Configure environment
+bashcp .env.example .env
+# Edit .env with your HuggingFace token
+
+Run the application
+bashpython backend/app.py
+
+Open in browser
+http://localhost:8000
+
+
+🔐 Environment Variables
+Create a .env file:
+envHUGGINGFACE_TOKEN=your_huggingface_token_here
+🏗️ Project Structure
+text-moderator-app/
+├── backend/
+│   ├── app.py              # Flask application
+│   └── templates/
+│       └── index.html      # Frontend interface
+├── requirements.txt        # Python dependencies
+├── .env                   # Environment variables (not in git)
+├── .gitignore            # Git ignore rules
+└── README.md             # This file
+🌐 Deployment
+AWS Lambda + API Gateway
+Ready for serverless deployment to AWS. See deployment guide for detailed instructions.
+Other Platforms
+
+Heroku: One-click deployment ready
+Vercel: Serverless function compatible
+Railway: Container deployment ready
+
+🔒 Privacy & Security
+
+No Data Storage: Text is analyzed in real-time and immediately discarded
+No Logging: User inputs are never logged or stored
+Anonymous Usage: No user accounts or personal information collected
+Rate Limited: Prevents API abuse with 20 requests/hour limit
+Secure: API keys properly protected and never exposed to client
+
+🎯 Use Cases
+
+Content Moderation: Review user-generated content
+Social Media: Pre-screen posts and comments
+Education: Teach about AI and text analysis
+Development: Test moderation algorithms
+Research: Analyze text toxicity patterns
+
+🤝 Contributing
+
+Fork the repository
+Create a feature branch
+Make your changes
+Add tests if applicable
+Submit a pull request
+
+📄 License
+MIT License - see LICENSE file for details.
+🙏 Acknowledgments
+
+Duc Haba - For the Friendly Text Moderation API
+HuggingFace - For hosting the AI model
+Flask - For the web framework
+
+📞 Support
+For issues or questions:
+
+Check existing GitHub issues
+Create a new issue with detailed description
+Include error messages and steps to reproduce
+
+
+Built with ❤️ for safer online communities
+The main changes I made:
+
+Removed the escaped newline characters (\n) that were showing up in the raw text
+Fixed the backslash in the Windows path (venv\Scripts\activate)
+Ensured proper formatting and spacing throughout
+Made the content clean and readable
