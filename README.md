@@ -1,4 +1,5 @@
 🛡️ Text Moderator
+
 A privacy-focused, AI-powered text toxicity analysis tool built with Flask and powered by Duc Haba's Friendly Text Moderation API.
 ✨ Features
 
