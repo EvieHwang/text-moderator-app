@@ -1,57 +1,62 @@
-🛡️ Text Moderator
+# 🛡️ Text Moderator
 
 A privacy-focused, AI-powered text toxicity analysis tool built with Flask and powered by Duc Haba's Friendly Text Moderation API.
-✨ Features
 
-🔒 Privacy First: Anonymous usage, no data logging or storage
-🎨 Modern UI: Beautiful Atom One Dark theme
-⚡ Real-time Analysis: Instant toxicity detection across multiple categories
-🛡️ Rate Limited: 20 requests per hour to prevent abuse
-📱 Responsive: Works on desktop and mobile
-🚫 No Registration: No accounts or personal info required
+## ✨ Features
 
-🔍 Analysis Categories
+- **🔒 Privacy First**: Anonymous usage, no data logging or storage
+- **🎨 Modern UI**: Beautiful Atom One Dark theme
+- **⚡ Real-time Analysis**: Instant toxicity detection across multiple categories
+- **🛡️ Rate Limited**: 20 requests per hour to prevent abuse
+- **📱 Responsive**: Works on desktop and mobile
+- **🚫 No Registration**: No accounts or personal info required
 
-Harassment & Threatening
-Hate Speech & Threatening
-Violence & Graphic Violence
-Sexual Content & Minors
-Self-Harm, Instructions & Intent
+## 🔍 Analysis Categories
 
-🚀 Quick Start
-Prerequisites
+- Harassment & Threatening
+- Hate Speech & Threatening
+- Violence & Graphic Violence
+- Sexual Content & Minors
+- Self-Harm, Instructions & Intent
 
-Python 3.9+
-HuggingFace account (for API access)
+## 🚀 Quick Start
 
-Local Development
+### Prerequisites
 
-Clone the repository
-bashgit clone <your-repo-url>
-cd text-moderator-app
+- Python 3.9+
+- HuggingFace account (for API access)
 
-Set up virtual environment
-bashpython -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+### Local Development
 
-Install dependencies
-bashpip install -r requirements.txt
+1. **Clone the repository**
+   git clone <your-repo-url>
+   cd text-moderator-app
 
-Configure environment
-bashcp .env.example .env
-# Edit .env with your HuggingFace token
+2. **Set up virtual environment**
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-Run the application
-bashpython backend/app.py
+3. **Install dependencies**
+   pip install -r requirements.txt
 
-Open in browser
-http://localhost:8000
+4. **Configure environment**
+   cp .env.example .env
+   # Edit .env with your HuggingFace token
 
+5. **Run the application**
+   python backend/app.py
 
-🔐 Environment Variables
+6. **Open in browser**
+   http://localhost:8000
+
+## 🔐 Environment Variables
+
 Create a .env file:
-envHUGGINGFACE_TOKEN=your_huggingface_token_here
-🏗️ Project Structure
+
+HUGGINGFACE_TOKEN=your_huggingface_token_here
+
+## 🏗️ Project Structure
+
 text-moderator-app/
 ├── backend/
 │   ├── app.py              # Flask application
@@ -61,59 +66,60 @@ text-moderator-app/
 ├── .env                   # Environment variables (not in git)
 ├── .gitignore            # Git ignore rules
 └── README.md             # This file
-🌐 Deployment
-AWS Lambda + API Gateway
+
+## 🌐 Deployment
+
+### AWS Lambda + API Gateway
+
 Ready for serverless deployment to AWS. See deployment guide for detailed instructions.
-Other Platforms
 
-Heroku: One-click deployment ready
-Vercel: Serverless function compatible
-Railway: Container deployment ready
+### Other Platforms
 
-🔒 Privacy & Security
+- **Heroku**: One-click deployment ready
+- **Vercel**: Serverless function compatible
+- **Railway**: Container deployment ready
 
-No Data Storage: Text is analyzed in real-time and immediately discarded
-No Logging: User inputs are never logged or stored
-Anonymous Usage: No user accounts or personal information collected
-Rate Limited: Prevents API abuse with 20 requests/hour limit
-Secure: API keys properly protected and never exposed to client
+## 🔒 Privacy & Security
 
-🎯 Use Cases
+- **No Data Storage**: Text is analyzed in real-time and immediately discarded
+- **No Logging**: User inputs are never logged or stored
+- **Anonymous Usage**: No user accounts or personal information collected
+- **Rate Limited**: Prevents API abuse with 20 requests/hour limit
+- **Secure**: API keys properly protected and never exposed to client
 
-Content Moderation: Review user-generated content
-Social Media: Pre-screen posts and comments
-Education: Teach about AI and text analysis
-Development: Test moderation algorithms
-Research: Analyze text toxicity patterns
+## 🎯 Use Cases
 
-🤝 Contributing
+- **Content Moderation**: Review user-generated content
+- **Social Media**: Pre-screen posts and comments
+- **Education**: Teach about AI and text analysis
+- **Development**: Test moderation algorithms
+- **Research**: Analyze text toxicity patterns
 
-Fork the repository
-Create a feature branch
-Make your changes
-Add tests if applicable
-Submit a pull request
+## 🤝 Contributing
 
-📄 License
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
 MIT License - see LICENSE file for details.
-🙏 Acknowledgments
 
-Duc Haba - For the Friendly Text Moderation API
-HuggingFace - For hosting the AI model
-Flask - For the web framework
+## 🙏 Acknowledgments
 
-📞 Support
+- **Duc Haba** - For the Friendly Text Moderation API
+- **HuggingFace** - For hosting the AI model
+- **Flask** - For the web framework
+
+## 📞 Support
+
 For issues or questions:
+1. Check existing GitHub issues
+2. Create a new issue with detailed description
+3. Include error messages and steps to reproduce
 
-Check existing GitHub issues
-Create a new issue with detailed description
-Include error messages and steps to reproduce
+---
 
-
-Built with ❤️ for safer online communities
-The main changes I made:
-
-Removed the escaped newline characters (\n) that were showing up in the raw text
-Fixed the backslash in the Windows path (venv\Scripts\activate)
-Ensured proper formatting and spacing throughout
-Made the content clean and readable
+**Built with ❤️ for safer online communities**
