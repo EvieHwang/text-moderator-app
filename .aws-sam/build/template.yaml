@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Text Moderator Serverless Application - Clean Version
+Globals:
+  Function:
+    Timeout: 60
+    MemorySize: 1024
+    Runtime: python3.9
+Parameters:
+  HuggingFaceToken:
+    Type: String
+    Description: HuggingFace API Token for Duc Haba's API
+    NoEcho: true
+Resources:
+  TextModeratorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: TextModeratorFunction
+      Handler: lambda_function.lambda_handler
+      Environment:
+        Variables:
+          HUGGINGFACE_TOKEN:
+            Ref: HuggingFaceToken
+      Events:
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        Health:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: get
+        TestConnection:
+          Type: Api
+          Properties:
+            Path: /api/test-connection
+            Method: get
+        Analyze:
+          Type: Api
+          Properties:
+            Path: /api/analyze
+            Method: post
+        API:
+          Type: Api
+          Properties:
+            Path: /api/{proxy+}
+            Method: any
+        Static:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+    Metadata:
+      SamResourceId: TextModeratorFunction
+Outputs:
+  TextModeratorApi:
+    Description: API Gateway endpoint URL for Text Moderator
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  ComplianceNote:
+    Description: Class Project Compliance
+    Value: Only uses duchaba/Friendly_Text_Moderation API as required

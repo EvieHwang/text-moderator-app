@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Moderator - Powered by Duc Haba's AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #282c34;
+            color: #abb2bf;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #21252b;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            border: 1px solid #3e4451;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #61afef, #c678dd);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .privacy-notice {
+            background: #2c313c;
+            border: 1px solid #98c379;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px;
+            color: #98c379;
+        }
+        
+        .privacy-notice h3 {
+            margin-bottom: 8px;
+            color: #98c379;
+            font-size: 1.1em;
+        }
+        
+        .privacy-notice p {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e06c75;
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #3e4451;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+            background: #282c34;
+            color: #abb2bf;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #61afef;
+        }
+        
+        .text-input::placeholder {
+            color: #5c6370;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .safer-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .safer-control label {
+            color: #d19a66;
+            margin-bottom: 0;
+        }
+        
+        .safer-slider {
+            width: 150px;
+            accent-color: #61afef;
+        }
+        
+        .analyze-btn {
+            background: linear-gradient(45deg, #61afef, #c678dd);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #282c34;
+            border-radius: 10px;
+            display: none;
+            border: 1px solid #3e4451;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .results h3 {
+            margin-bottom: 15px;
+            color: #e06c75;
+        }
+        
+        .json-output {
+            background: #1e2127;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid #3e4451;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #5c6370;
+        }
+        
+        .error {
+            background: #3c2415;
+            color: #e06c75;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #e06c75;
+        }
+        
+        .success {
+            background: #22372b;
+            color: #98c379;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #98c379;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #5c6370;
+            border-top: 1px solid #3e4451;
+        }
+        
+        @media (max-width: 600px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .safer-control {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Text Moderator</h1>
+            <p>AI-powered toxicity analysis using Duc Haba's Friendly Text Moderation</p>
+            <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9em;">
+                🎓 <strong>Class Project:</strong> Strict compliance with duchaba/Friendly_Text_Moderation API requirement
+            </div>
+        </div>
+        
+        <div class="privacy-notice">
+            <h3>🔒 Privacy & Security</h3>
+            <p>
+                <strong>Anonymous & Private:</strong> Your text is analyzed instantly without being stored, logged, or associated with your identity. 
+                We respect your privacy and do not collect personal information. Rate limited to 20 requests per hour per IP.
+            </p>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <label for="textInput">Enter text to analyze:</label>
+                <textarea 
+                    id="textInput" 
+                    class="text-input" 
+                    placeholder="Type or paste your text here to check for toxicity... Try examples like: 'Hello world!', 'This is frustrating', or 'I disagree with this opinion' (max 5000 characters)"
+                    maxlength="5000"
+                ></textarea>
+            </div>
+            
+            <div class="controls">
+                <div class="safer-control">
+                    <label for="saferSlider">Sensitivity:</label>
+                    <input 
+                        type="range" 
+                        id="saferSlider" 
+                        class="safer-slider"
+                        min="0.01" 
+                        max="0.1" 
+                        step="0.01" 
+                        value="0.02"
+                    >
+                    <span id="saferValue">0.02</span>
+                </div>
+                
+                <button id="analyzeBtn" class="analyze-btn">
+                    🔍 Analyze Text
+                </button>
+                
+                <button id="testBtn" class="analyze-btn" style="background: linear-gradient(45deg, #98c379, #56b6c2); margin-left: 10px;">
+                    🧪 Test API
+                </button>
+            </div>
+            
+            <div id="results" class="results">
+                <h3>📊 Analysis Results</h3>
+                <div id="resultsContent"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by <strong>Duc Haba's Friendly Text Moderation API</strong> via HuggingFace</p>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const saferSlider = document.getElementById('saferSlider');
+        const saferValue = document.getElementById('saferValue');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const testBtn = document.getElementById('testBtn');
+        const results = document.getElementById('results');
+        const resultsContent = document.getElementById('resultsContent');
+
+        // Update safer value display
+        saferSlider.addEventListener('input', function() {
+            saferValue.textContent = this.value;
+        });
+
+        // Analyze text function
+        async function analyzeText() {
+            const text = textInput.value.trim();
+            
+            if (!text) {
+                showError('Please enter some text to analyze.');
+                return;
+            }
+
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = '🔄 Analyzing...';
+            
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        safer: parseFloat(saferSlider.value)
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.status === 429) {
+                    showError('Rate limit exceeded. Please wait before making more requests. (20 requests per hour limit)');
+                } else if (data.success) {
+                    showResults(data);
+                } else {
+                    showError(data.error || 'Analysis failed', data.suggestion);
+                }
+            } catch (error) {
+                showError('Network error: ' + error.message, 'Please check your internet connection and try again.');
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = '🔍 Analyze Text';
+            }
+        }
+
+        // Show results with improved, user-friendly formatting
+        function showResults(data) {
+            const analysis = data.results.analysis;
+            
+            if (!analysis) {
+                showError('No analysis data received from API');
+                return;
+            }
+            
+            // Create toxicity level indicator
+            const maxValue = analysis.max_value || 0;
+            let toxicityLevel = 'Safe';
+            let levelColor = '#28a745';
+            let riskIcon = '✅';
+            let recommendation = 'This content appears safe for most audiences.';
+            
+            if (maxValue > 0.7) {
+                toxicityLevel = 'High Risk';
+                levelColor = '#dc3545';
+                riskIcon = '🚨';
+                recommendation = 'This content contains harmful language and should be reviewed or removed.';
+            } else if (maxValue > 0.5) {
+                toxicityLevel = 'Moderate Risk';
+                levelColor = '#fd7e14';
+                riskIcon = '⚠️';
+                recommendation = 'This content may be inappropriate for some audiences. Consider reviewing.';
+            } else if (maxValue > 0.3) {
+                toxicityLevel = 'Low Risk';
+                levelColor = '#ffc107';
+                riskIcon = '🟡';
+                recommendation = 'This content contains mild language that some may find concerning.';
+            } else if (maxValue > 0.1) {
+                toxicityLevel = 'Minimal Risk';
+                levelColor = '#17a2b8';
+                riskIcon = '🟠';
+                recommendation = 'This content is generally appropriate with minimal concerns.';
+            }
+            
+            // Get the primary concern in user-friendly language
+            const concernMap = {
+                'harassment': 'Harassment',
+                'hate': 'Hate Speech',
+                'violence': 'Violence',
+                'sexual': 'Sexual Content',
+                'self-harm': 'Self-Harm',
+                'self_harm': 'Self-Harm'
+            };
+            
+            const primaryConcern = concernMap[analysis.max_key] || analysis.max_key;
+            const confidenceScore = Math.round((1 - maxValue) * 100);
+            
+            const html = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="display: inline-block; background: ${levelColor}; color: white; padding: 15px 30px; border-radius: 50px; font-size: 1.3em; font-weight: bold; margin-bottom: 15px;">
+                        ${riskIcon} ${toxicityLevel}
+                    </div>
+                    
+                    <div style="font-size: 1.1em; color: #abb2bf; margin-bottom: 20px;">
+                        ${recommendation}
+                    </div>
+                    
+                    ${maxValue > 0.1 ? `
+                        <div style="background: #2c313c; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                            <strong>Primary Concern:</strong> ${primaryConcern} (${Math.round(maxValue * 100)}% confidence)
+                        </div>
+                    ` : ''}
+                    
+                    <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2em; color: ${levelColor};">${Math.round(maxValue * 100)}%</div>
+                            <div style="color: #666; font-size: 0.9em;">Risk Level</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2em; color: #28a745;">${confidenceScore}%</div>
+                            <div style="color: #666; font-size: 0.9em;">Safety Score</div>
+                        </div>
+                    </div>
+                    
+                    ${analysis.is_flagged ? 
+                        `<div style="background: linear-gradient(45deg, #ff6b6b, #ee5a5a); color: white; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                            <strong>🚫 Content Flagged</strong><br>
+                            This text has been automatically flagged and may require human review.
+                        </div>` : 
+                        `<div style="background: linear-gradient(45deg, #51cf66, #40c057); color: white; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                            <strong>✅ Content Approved</strong><br>
+                            This text passed our safety checks and appears appropriate.
+                        </div>`
+                    }
+                </div>
+                
+                ${data.results.chart_data && data.results.chart_data.plot ? `
+                    <div style="text-align: center; margin: 25px 0;">
+                        <h4 style="color: #abb2bf; margin-bottom: 15px;">📊 Detailed Analysis</h4>
+                        <img src="${data.results.chart_data.plot}" alt="Toxicity Analysis Chart" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+                    </div>
+                ` : ''}
+                
+                <details style="margin-top: 30px; border: 1px solid #3e4451; border-radius: 8px;">
+                    <summary style="cursor: pointer; padding: 15px; background: #2c313c; border-radius: 8px 8px 0 0; font-weight: 600; color: #abb2bf;">
+                        🔧 Technical Details (for developers)
+                    </summary>
+                    <div style="padding: 15px; background: #282c34;">
+                        <h5 style="margin-bottom: 10px; color: #e06c75;">Raw Analysis Data:</h5>
+                        <div class="json-output">${JSON.stringify(analysis, null, 2)}</div>
+                    </div>
+                </details>
+                
+                <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #3e4451; color: #5c6370; font-size: 0.9em;">
+                    Analysis completed at ${new Date(data.timestamp).toLocaleString()}<br>
+                    Sensitivity Level: ${saferSlider.value} | Powered by Duc Haba's AI
+                </div>
+            `;
+            
+            resultsContent.innerHTML = html;
+            results.classList.add('show');
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show error message with suggestion
+        function showError(message, suggestion = null) {
+            let errorHtml = `<div class="error">❌ ${message}</div>`;
+            if (suggestion) {
+                errorHtml += `<div style="background: #2c313c; color: #ffc107; padding: 10px; border-radius: 5px; margin-top: 10px; border-left: 3px solid #ffc107;">💡 ${suggestion}</div>`;
+            }
+            resultsContent.innerHTML = errorHtml;
+            results.classList.add('show');
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            resultsContent.innerHTML = `<div class="success">✅ ${message}</div>`;
+            results.classList.add('show');
+        }
+
+        // Test API connection
+        async function testConnection() {
+            testBtn.disabled = true;
+            testBtn.textContent = '🔄 Testing...';
+            
+            try {
+                const response = await fetch('/api/test-connection');
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess('API connection test successful! The service is working properly.');
+                } else {
+                    showError('API connection test failed: ' + data.error, 'The backend service may be down or misconfigured.');
+                }
+            } catch (error) {
+                showError('Connection test failed: ' + error.message, 'Check if the server is running and accessible.');
+            } finally {
+                testBtn.disabled = false;
+                testBtn.textContent = '🧪 Test API';
+            }
+        }
+        
+        // Event listeners
+        analyzeBtn.addEventListener('click', analyzeText);
+        testBtn.addEventListener('click', testConnection);
+        
+        // Allow Enter key to trigger analysis (Ctrl+Enter in textarea)
+        textInput.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                analyzeText();
+            }
+        });
+
+        // Character counter
+        textInput.addEventListener('input', function() {
+            const remaining = 5000 - this.value.length;
+            const label = document.querySelector('label[for="textInput"]');
+            label.textContent = `Enter text to analyze: (${remaining} characters remaining)`;
+        });
+    </script>
+</body>
+</html>

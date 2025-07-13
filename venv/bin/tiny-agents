@@ -1,4 +1,4 @@
-#!/Users/evehwang/Documents/GitHub/text-moderator-app/venv/bin/python3
+#!/Users/evehwang/GitHub/text-moderator-app/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
